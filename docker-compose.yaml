@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: blog-app
+      DATABASE_PASSWORD: "dummy"
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:16.8
+    environment:
+      POSTGRES_USER: "blog-app"
+      POSTGRES_PASSWORD: "dummy"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
